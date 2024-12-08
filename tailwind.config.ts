@@ -8,6 +8,14 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "480px",
+      },
+
+      fontFamily: {
+        sans: ['var(--font-plus-jakarta-sans)', 'sans-serif'],
+      },
+
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
