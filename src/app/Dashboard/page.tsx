@@ -19,7 +19,6 @@ import { IoBagRemoveOutline } from "react-icons/io5"; // <IoBagRemoveOutline /> 
 import { TbLogout2 } from "react-icons/tb"; // <TbLogout2 /> Logout
 import { IoMdSunny } from "react-icons/io"; // <IoMdSunny /> Dark
 import { IoMoonOutline } from "react-icons/io5"; // <IoMoonOutline /> Light
-import { RiArrowDropDownLine } from "react-icons/ri"; // <RiArrowDropDownLine /> Down Arrow
 
 
 export default function DashboardPage() {

@@ -141,7 +141,7 @@ export default function DetailPage() {
         </div>
 
         <p className="w-[460px] h-[120px] left-[24px] top-[128px] absolute text-[#596780] text-xl font-normal leading-10">
-            NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".
+            NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the &quot;race track&quot;.
         </p>
 
         <div className="left-[24px] top-[280px] absolute justify-start items-start gap-10 inline-flex">
