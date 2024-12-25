@@ -269,7 +269,7 @@ return (
     
 
         {/* Recent Cars */}
-        <div className="w-full px-4 lg:w-[1016px] h-auto lg:h-[448px] left-0 lg:left-[392px] top-[1180px] lg:top-[1056px] absolute flex flex-col justify-start items-start gap-2 lg:gap-4">
+        <div className="w-full px-4 lg:w-[1016px] h-auto lg:h-[448px] left-[18px] lg:left-[392px] top-[1180px] lg:top-[1056px] absolute flex flex-col justify-start items-start gap-2 lg:gap-4">
             <div className="flex justify-between items-center lg:w-full lg:max-w-7xl lg:mx-auto py-2 gap-[160px] lg:gap-[754px]">
                 <div className="text-[#90a3bf] text-base font-semibold ">Recent Car</div>
                 <Link href="" className="text-[#3563e9] text-base font-semibold hover:underline">View All</Link>
@@ -323,7 +323,7 @@ return (
         </div>
 
         {/* Recomendation Car */}
-        <div className="w-full px-4 lg:w-[1016px] h-auto lg:h-[448px] left-0 lg:left-[392px] top-[1640px] lg:top-[1536px] absolute flex-col justify-start items-start gap-2 lg:gap-4 inline-flex">
+        <div className="w-full px-4 lg:w-[1016px] h-auto lg:h-[448px] left-[18px] lg:left-[392px] top-[1640px] lg:top-[1536px] absolute flex-col justify-start items-start gap-2 lg:gap-4 inline-flex">
             <div className="flex justify-between items-center lg:w-full lg:max-w-7xl lg:mx-auto py-2 gap-[80px] lg:gap-[754px]">
                 <div className="text-[#90a3bf] text-base font-semibold ">Recomendation Car</div>
                 <Link href="/all-cars" className="text-[#3563e9] text-base font-semibold hover:underline">View All</Link>
@@ -398,8 +398,8 @@ return (
 
             <div className="w-[968px] h-32 left-[24px] top-[232px] absolute">
             <div className="h-14 left-[55px] lg:left-[72px] top-0 absolute flex-col justify-start items-start gap-2 inline-flex">
-                <div className="w-32 h-7 text-[#1a202c] text-xl font-bold leading-[30px]">Skylar Dias</div>
-                <div className="w-32 h-5 text-[#90a3bf] text-sm font-medium leading-[21px]">CEO at Amazon</div>
+                <div className="w-32 h-7 text-[#1a202c] text-base lg:text-xl font-bold leading-[30px]">Skylar Dias</div>
+                <div className="w-32 h-5 text-[#90a3bf] text-xs lg:text-sm font-medium leading-[21px]">CEO at Amazon</div>
             </div>
             <div className="h-11 lg:h-14 left-[180px] lg:left-[840px] mt-2 absolute flex-col justify-start items-end gap-2 inline-flex">
                 <div className="w-20 lg:w-32 h-6 lg:h-7 text-right text-[#90a3bf] text-xs lg:text-sm font-medium leading-4 lg:leading-[21px]">20 July 2022</div>
