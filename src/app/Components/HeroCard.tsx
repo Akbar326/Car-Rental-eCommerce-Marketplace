@@ -1,5 +1,11 @@
+'use client'
 import React from "react";
 import Card from "@/app/Components/Crads"
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from "swiper/modules";
 
 import Koenigsegg from "@/app/assets/Koenigsegg.png";
 import NissanGTR from "@/app/assets/NissanGTR.png";
@@ -199,7 +205,7 @@ const HeroCard = () => {
               View All
             </h3>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+          <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
             {carsData.map((car, index) => (
               <Card
                 key={index}
@@ -213,6 +219,32 @@ const HeroCard = () => {
               />
             ))}
           </div>
+
+                          {/* Small Screens */}
+                          <Swiper
+                  className="swiper-container w-full mt-6"
+                  modules={[Pagination]}
+                  spaceBetween={10}
+                  slidesPerView={1}
+                  pagination={{
+                    clickable: true,
+                    el: ".custom-pagination",
+                  }}
+                >
+                  {carsData.map((car, index) => (
+                    <SwiperSlide key={index}>
+                      <Card
+                        title={car.title}
+                        type={car.type}
+                        price={car.price}
+                        discount={car.discount}
+                        features={car.features}
+                        image={car.image}
+                        isFavorite={car.isFavorite}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
         </div>
 
         {/* Recommendation Car Section */}

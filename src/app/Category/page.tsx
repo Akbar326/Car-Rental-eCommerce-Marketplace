@@ -1,17 +1,10 @@
-import { IoCheckbox } from "react-icons/io5";
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
-import { FaChevronDown } from "react-icons/fa";
-import { LuArrowDownUp } from "react-icons/lu";
+"use client"
+import { useState } from "react";
+import CheckboxItem from "@/app/Components/CheckboxItem";
 
-// Import Icons
-import { IoHeart } from "react-icons/io5";
-import { IoIosHeartEmpty } from "react-icons/io";
-import { BsFuelPumpFill } from "react-icons/bs";
-import { GiCartwheel } from "react-icons/gi";
-import { HiUsers } from "react-icons/hi2";
-
-// Import Car Images
-import Image from "next/image";
+import React from "react";
+import Card from "@/app/Components/Crads"
+``
 import Koenigsegg from "@/app/assets/Koenigsegg.png";
 import NissanGTR from "@/app/assets/NissanGTR.png";
 import RollsRoyce from "@/app/assets/RollsRoyce.png";
@@ -22,765 +15,327 @@ import MGZXExclusive from "@/app/assets/MGZX.png";
 import NewMGZS from "@/app/assets/NewMGZS.png";
 import MGExcite from "@/app/assets/MGExite.png";
 
+// Icon
+import { BsFuelPumpFill } from "react-icons/bs";
+import { GiCartwheel } from "react-icons/gi";
+import { HiUsers } from "react-icons/hi";
+import { FaChevronDown } from "react-icons/fa";
+import { LuArrowDownUp } from "react-icons/lu";
+
+// Cars Cards Array
+const carsData = [
+    {
+      title: "Koenigsegg",
+      type: "Sport",
+      price: 99.0,
+      isFavorite: true,
+      features: [
+        { icon: <BsFuelPumpFill className="w-6 h-6 text-[#90a3bf]" />, label: "90L" },
+        { icon: <GiCartwheel className="w-6 h-6 text-[#90a3bf]" />, label: "Manual" },
+        { icon: <HiUsers className="w-6 h-6 text-[#90a3bf]" />, label: "2 People" },
+      ],
+      image: Koenigsegg,
+    },
+  
+    {
+      title: "Nissan GT-R",
+      type: "Sport",
+      price: 80.00,
+      discount: 100.00,
+      isFavorite: false,
+      features: [
+        { icon: <BsFuelPumpFill className="w-6 h-6 text-[#90a3bf]" />, label: "80L" },
+        { icon: <GiCartwheel className="w-6 h-6 text-[#90a3bf]" />, label: "Manual" },
+        { icon: <HiUsers className="w-6 h-6 text-[#90a3bf]" />, label: "2 People" },
+      ],
+      image: NissanGTR,
+    },
+  
+    {
+      title: "Rolls-Royce",
+      type: "Sedan",
+      price: 96.00,
+      isFavorite: false,
+      features: [
+        { icon: <BsFuelPumpFill className="w-6 h-6 text-[#90a3bf]" />, label: "70L" },
+        { icon: <GiCartwheel className="w-6 h-6 text-[#90a3bf]" />, label: "Manual" },
+        { icon: <HiUsers className="w-6 h-6 text-[#90a3bf]" />, label: "4 People" },
+      ],
+      image: RollsRoyce,
+    },
+  
+    {
+        title: "All New Rush",
+        type: "SUV",
+        price: 72.00,
+        discount: 80.00,
+        isFavorite: true,
+        features: [
+          { icon: <BsFuelPumpFill className="w-6 h-6 text-[#90a3bf]" />, label: "70L" },
+          { icon: <GiCartwheel className="w-6 h-6 text-[#90a3bf]" />, label: "Manual" },
+          { icon: <HiUsers className="w-6 h-6 text-[#90a3bf]" />, label: "6 People" },
+        ],
+        image: NewRush,
+      },
+
+      {
+        title: "CR - V",
+        type: "SUV",
+        price: 80.00,
+        isFavorite: true,
+        features: [
+          { icon: <BsFuelPumpFill className="w-6 h-6 text-[#90a3bf]" />, label: "80L" },
+          { icon: <GiCartwheel className="w-6 h-6 text-[#90a3bf]" />, label: "Manual" },
+          { icon: <HiUsers className="w-6 h-6 text-[#90a3bf]" />, label: "6 People" },
+        ],
+        image: CRV,
+      },
+
+      {
+        title: "All New Terios",
+        type: "SUV",
+        price: 74.00,
+        isFavorite: true,
+        features: [
+          { icon: <BsFuelPumpFill className="w-6 h-6 text-[#90a3bf]" />, label: "90L" },
+          { icon: <GiCartwheel className="w-6 h-6 text-[#90a3bf]" />, label: "Manual" },
+          { icon: <HiUsers className="w-6 h-6 text-[#90a3bf]" />, label: "6 People" },
+        ],
+        image: NewTerios,
+      },
+
+      {
+        title: "MG ZX Exlusive",
+        type: "Hatchback",
+        price: 76.00,
+        discount: 80.00,
+        isFavorite: true,
+        features: [
+          { icon: <BsFuelPumpFill className="w-6 h-6 text-[#90a3bf]" />, label: "70L" },
+          { icon: <GiCartwheel className="w-6 h-6 text-[#90a3bf]" />, label: "Manual" },
+          { icon: <HiUsers className="w-6 h-6 text-[#90a3bf]" />, label: "4 People" },
+        ],
+        image: MGZXExclusive,
+      },
+    
+      {
+        title: "New MG ZS",
+        type: "SUV",
+        price: 80.00,
+        isFavorite: true,
+        features: [
+          { icon: <BsFuelPumpFill className="w-6 h-6 text-[#90a3bf]" />, label: "80L" },
+          { icon: <GiCartwheel className="w-6 h-6 text-[#90a3bf]" />, label: "Manual" },
+          { icon: <HiUsers className="w-6 h-6 text-[#90a3bf]" />, label: "6 People" },
+        ],
+        image: NewMGZS,
+      },
+    
+      {
+        title: "MG ZX Excite",
+        type: "Hatchback",
+        price: 70.00,
+        isFavorite: true,
+        features: [
+          { icon: <BsFuelPumpFill className="w-6 h-6 text-[#90a3bf]" />, label: "90L" },
+          { icon: <GiCartwheel className="w-6 h-6 text-[#90a3bf]" />, label: "Manual" },
+          { icon: <HiUsers className="w-6 h-6 text-[#90a3bf]" />, label: "4 People" },
+        ],
+        image: MGExcite,
+      },
+  ];
 
 export default function CategoryPage() {
+    // For Check Box
+    const [isChecked, setIsChecked] = useState(false);
+    const handleChange = () => {
+        setIsChecked(!isChecked);
+    };
+
+    // For Slider
+    const [sliderValue, setSliderValue] = useState(50);
+    const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSliderValue(Number(e.target.value));
+    };
+
+    // For Sidebar Toggle
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const handleToggle = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
     return (
-<div className="w-full max-w-[1441px] h-[1600px] relative bg-[#f6f7f9]">
+      <div className="w-full max-w-[1440px] min-h-screen mx-auto bg-[#f6f7f9] relative">
 
-    <div className="w-[360px] h-[1600px] left-0 top-0 absolute bg-white border-r border-[#f2f4f6]">
-        {/* Type */}
-        <div className="left-[32px] top-[32px] absolute flex-col justify-start items-start gap-7 inline-flex">
-        <div className="w-[104px] h-5 text-[#90a3bf] text-xs font-semibold">T Y P E</div>
-        <div className="flex-col justify-start items-start gap-8 flex">
+            {/* Toggel button for small screen */}
+            <button 
+                    onClick={handleToggle}
+                    aria-controls="default-sidebar" 
+                    aria-expanded={isSidebarOpen}
+                    type="button" 
+                    className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
+                    <span className="sr-only">Open sidebar</span>
+                    <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path clipRule="evenodd" fillRule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+                    </svg>
+            </button>
 
-            {/* Sports */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <IoCheckbox className="w-6 h-6 top-1 text-[#3563E9] relative" />
-                <div className="w-36 h-6 text-justify gap-2"><span className="text-[#596780] text-xl font-semibold  leading-[30px]">Sport</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (10)</span></div>
-            </div>
-
-            {/* SUV */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <IoCheckbox className="w-6 h-6 top-1 text-[#3563E9] relative" />
-                <div className="w-20 h-6 text-justify"><span className="text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">SUV</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (12)</span></div>
-            </div>
-
-            {/* MPV */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <MdCheckBoxOutlineBlank className="w-6 h-6 top-1 text-[#90A3BF] relative"/>
-                <div className="w-[88px] h-6 text-justify"><span className="text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">MPV</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (16)</span></div>
-            </div>
-
-            {/* Sedan */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <MdCheckBoxOutlineBlank className="w-6 h-6 top-1 text-[#90A3BF] relative"/>
-                <div className="w-28 h-6 text-justify"><span className="text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">Sedan</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (20)</span></div>
-            </div>
-
-            {/* Coupe */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <MdCheckBoxOutlineBlank className="w-6 h-6 top-1 text-[#90A3BF] relative"/>
-                <div className="w-28 h-6 text-justify"><span className="text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">Coupe</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (14)</span></div>
-            </div>
-
-            {/* Hatchback */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <MdCheckBoxOutlineBlank className="w-6 h-6 top-1 text-[#90A3BF] relative"/>
-                <div className="w-40 h-6 text-justify"><span className="text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">Hatchback</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (14)</span></div>
-            </div>
-        </div>
-        </div>
-
-
-        {/* Capacity */}
-        <div className="left-[32px] top-[440px] absolute flex-col justify-start items-start gap-7 inline-flex">
-        <div className="w-[104px] h-5 text-[#90a3bf] text-xs font-semibold font-['Plus Jakarta Sans']">C A P A C I T Y</div>
-        <div className="flex-col justify-start items-start gap-8 flex">
-
-            {/* 2 Person */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <IoCheckbox className="w-6 h-6 top-1 text-[#3563E9] relative" />
-                <div className="w-36 h-6 text-justify"><span className="text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">2 Person</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (10)</span></div>
-            </div>
-
-            {/* 4 Person */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <MdCheckBoxOutlineBlank className="w-6 h-6 top-1 text-[#90A3BF] relative"/>
-                <div className="w-[127px] h-6 text-justify"><span className="text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">4 Person</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (14)</span></div>
-            </div>
-
-            {/* 6 Person */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <MdCheckBoxOutlineBlank className="w-6 h-6 top-1 text-[#90A3BF] relative"/>
-                <div className="w-[130px] h-6 text-justify"><span className="text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">6 Person</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (12)</span></div>
-            </div>
-
-            {/* 8 or More */}
-            <div className="justify-start items-start gap-2 inline-flex">
-                <IoCheckbox className="w-6 h-6 top-1 text-[#3563E9] relative" />
-                <div className="w-36 h-6 text-justify"><span className="text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">8 or More</span><span className="text-[#90a3bf] text-xl font-semibold leading-[30px]">  (16)</span></div>
-            </div>
-        </div>
-        </div>
-
-        {/* Price */}
-        <div className="left-[32px] top-[736px] absolute flex-col justify-start items-start gap-7 inline-flex">
-        <div className="w-[104px] h-5 text-[#90a3bf] text-xs font-semibold font-['Plus Jakarta Sans']">P R I C E</div>
-        <div className="flex-col justify-start items-start gap-3 flex">
-            <div className="w-[296px] h-5 relative">
-            <div className="w-[296px] h-3 left-0 top-[4px] absolute bg-[#90a3bf] rounded-xl" />
-            <div className="w-[220px] h-3 left-0 top-[4px] absolute bg-[#3563e9] rounded-xl" />
-            <div className="w-5 h-5 left-[210px] top-0 absolute bg-[#3563e9] rounded-full border-4 border-white" />
-            </div>
-            <div className="w-[296px] h-6 text-justify text-[#596780] text-xl font-semibold font-['Plus Jakarta Sans'] leading-[30px]">Max. $100.00</div>
-        </div>
-        </div>
-
-
-    </div>
-
-  <div className="left-[392px] top-[200px] absolute flex-col justify-start items-start gap-8 inline-flex">
-        <div className="justify-start items-start gap-8 inline-flex">
-
-            {/* Koenigsegg */}
-            <div className="w-[304px] h-[388px] relative bg-white rounded-[10px]">
-              <div className="left-[24px] top-[24px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                <div className="w-32 h-6 text-[#1a202c] text-xl font-bold leading-[30px]">
-                  Koenigsegg
-                </div>
-                <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold leading-[21px]">
-                  Sport
-                </div>
-              </div>
-              <IoHeart className="w-6 h-6 left-[256px] top-[24px] absolute text-red-500" />
-
-              <div className="left-[24px] top-[320px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                <div className="w-[116px] h-11">
-                  <span className="text-[#1a202c] text-xl font-bold]">
-                    $99.00/{" "}
-                  </span>
-                  <span className="text-[#90a3bf] text-sm font-bold">
-                    day
-                  </span>
-                </div>
-              </div>
-              <div className="w-[116px] h-11 px-5 left-[164px] top-[320px] absolute bg-[#3563e9] rounded justify-center items-center gap-2 inline-flex">
-                <div className="w-[76px] h-6 text-center text-white text-base font-semibold leading-normal">
-                  Rent Now
-                </div>
-              </div>
-              <div className="left-[24px] top-[272px] absolute justify-start items-start gap-4 inline-flex">
-                <div className="justify-start items-start gap-1.5 flex">
-                  <div className="w-6 h-6 relative">
-                    <div className="w-6 h-6 left-0 top-0 absolute"></div>
-                  </div>
-                  <BsFuelPumpFill className="w-6 h-6 text-[#90A3BF] absolute" />
-                  <div className="w-7 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                    90L
-                  </div>
-                </div>
-                <div className="justify-start items-start gap-1 flex">
-                  <GiCartwheel className="w-6 h-6 text-[#90A3BF]" />
-                  <div className="w-12 h-6 text-[#90a3bf] text-sm font-medium">
-                    Manual
-                  </div>
-                </div>
-                <div className="justify-start items-start gap-1.5 flex">
-                  <HiUsers className="w-6 h-6 text-[#90a3bf]" />
-                  <div className="w-[60px] h-6 text-[#90a3bf] text-sm font-medium">
-                    2 People
-                  </div>
-                </div>
-              </div>
-              <Image
-                src={Koenigsegg}
-                alt="Koeingsegg"
-                className="w-[232px] h-[72px] left-[36px] top-[136px] absolute"
-              />
-              <div className="w-[304px] h-[68px] absolute top-[167px] bg-gradient-to-b from-transparent to-white" />
-            </div>
-
-            {/* Nissan GT-R */}
-            <div className="w-[304px] h-[388px] relative bg-white rounded-[10px]">
-              <div className="left-[24px] top-[24px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                <div className="w-32 h-6 text-[#1a202c] text-xl font-bold leading-[30px]">
-                  Nissan GT - R
-                </div>
-                <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold leading-[21px]">
-                  Sport
-                </div>
-              </div>
-              <div className="w-[116px] h-11 px-5 left-[164px] top-[320px] absolute bg-[#3563e9] rounded justify-center items-center gap-2 inline-flex">
-                <div className="w-[76px] h-6 text-center text-white text-base font-semibold leading-normal">
-                  Rent Now
-                </div>
-              </div>
-              <div className="left-[24px] top-[272px] absolute justify-start items-start gap-4 inline-flex">
-                <div className="justify-start items-start gap-1.5 flex">
-                  <BsFuelPumpFill className="w-6 h-6 text-[#90A3BF]" />
-                  <div className="w-7 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                    80L
-                  </div>
-                </div>
-                <div className="justify-start items-start gap-1 flex">
-                  <GiCartwheel className="w-6 h-6 text-[#90A3BF]" />
-                  <div className="w-12 h-6 text-[#90a3bf] text-sm font-medium">
-                    Manual
-                  </div>
-                </div>
-                <div className="justify-start items-start gap-1.5 flex">
-                  <HiUsers className="w-6 h-6 text-[#90a3bf]" />
-                  <div className="w-[60px] h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                    2 People
-                  </div>
-                </div>
-              </div>
-              <IoIosHeartEmpty className="w-6 h-6 text-[#90A3BF] left-[256px] top-[24px] absolute" />
-              <div className="left-[24px] top-[316px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                <div className="w-32 h-6">
-                  <span className="text-[#1a202c] text-xl font-bold">
-                    $80.00/{" "}
-                  </span>
-                  <span className="text-[#90a3bf] text-sm font-bold">
-                    day
-                  </span>
-                </div>
-                <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold line-through">
-                  $100.00
-                </div>
-              </div>
-              <Image
-                src={NissanGTR}
-                alt="Nissa GT-R"
-                className="w-[204px] h-16 left-[40px] top-[138px] absolute"
-              />
-              <div className="w-[304px] h-[68px] absolute top-[167px] bg-gradient-to-b from-transparent to-white" />
-            </div>
-
-            {/* Rools Royce */}
-            <div className="w-[304px] h-[388px] relative bg-white rounded-[10px]">
-              <div className="left-[24px] top-[24px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                <div className="w-32 h-6 text-[#1a202c] text-xl font-bold leading-[30px]">
-                  Rolls - Royce
-                </div>
-                <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold leading-[21px]">
-                  Sedan
-                </div>
-                <IoIosHeartEmpty className="w-6 h-6 text-[#90A3BF] left-[230px] absolute" />
-              </div>
-              <div className="w-6 h-6 left-[256px] top-[24px] absolute">
-                <div className="w-6 h-6 left-0 top-0 absolute"></div>
-              </div>
-              <div className="left-[24px] top-[320px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                <div className="w-[116px] h-11">
-                  <span className="text-[#1a202c] text-xl font-bold">
-                    $96.00/{" "}
-                  </span>
-                  <span className="text-[#90a3bf] text-sm font-bold">
-                    day
-                  </span>
-                </div>
-              </div>
-              <div className="w-[116px] h-11 px-5 left-[164px] top-[320px] absolute bg-[#3563e9] rounded justify-center items-center gap-2 inline-flex">
-                <div className="w-[76px] h-6 text-center text-white text-base font-semibold leading-normal">
-                  Rent Now
-                </div>
-              </div>
-              <div className="left-[24px] top-[272px] absolute justify-start items-start gap-4 inline-flex">
-                <div className="justify-start items-start gap-1.5 flex">
-                  <BsFuelPumpFill className="w-6 h-6 text-[#90A3BF]" />
-                  <div className="w-7 h-6 text-[#90a3bf] text-sm font-medium">
-                    70L
-                  </div>
-                </div>
-                <div className="justify-start items-start gap-1 flex">
-                  <GiCartwheel className="w-6 h-6 text-[#90A3BF]" />
-                  <div className="w-12 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                    Manual
-                  </div>
-                </div>
-                <div className="justify-start items-start gap-1.5 flex">
-                  <HiUsers className="w-6 h-6 text-[#90a3bf]" />
-                  <div className="w-[60px] h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                    4 People
-                  </div>
-                </div>
-              </div>
-              <Image
-                src={RollsRoyce}
-                alt="Rolls Royce"
-                className="w-[220px] h-[68px] left-[40px] top-[136px] absolute"
-              />
-              <div className="w-[304px] h-[68px] absolute top-[167px] bg-gradient-to-b from-transparent to-white" />
-            </div>
-        </div>
-
-        <div className="justify-start items-start gap-8 inline-flex">
-
-              {/*All  New Rush */}
-              <div className="w-[304px] h-[388px] relative bg-white rounded-[10px]">
-                <div className="w-[116px] h-11 px-5 left-[164px] top-[320px] absolute bg-[#3563e9] rounded justify-center items-center gap-2 inline-flex">
-                  <div className="w-[76px] h-6 text-center text-white text-base font-semibold leading-normal">
-                    Rent Now
-                  </div>
-                </div>
-                <div className="left-[24px] top-[272px] absolute justify-start items-start gap-4 inline-flex">
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <BsFuelPumpFill className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-7 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      70L
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1 flex">
-                    <GiCartwheel className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-12 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      Manual
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <HiUsers className="w-6 h-6 text-[#90a3bf]" />
-                    <div className="w-[60px] h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      6 People
-                    </div>
-                  </div>
-                </div>
-                <div className="w-6 h-6 left-[256px] top-[24px] absolute">
-                  <div className="w-6 h-6 left-0 top-0 absolute"></div>
-                </div>
-                <div className="left-[24px] top-[24px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-32 h-6 text-[#1a202c] text-xl font-bold leading-[30px]">
-                    All New Rush
-                  </div>
-                  <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold leading-[21px]">
-                    SUV
-                  </div>
-                  <IoIosHeartEmpty className="w-6 h-6 text-[#90A3BF] left-[220px] absolute" />
-                </div>
-
-                <Image
-                  src={NewRush}
-                  alt="NewRush"
-                  className="w-56 h-[100px] left-[40px] top-[122px] absolute"
-                />
-                <div className="left-[24px] top-[316px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-32 h-6">
-                    <span className="text-[#1a202c] text-xl font-bold">
-                      $72.00/{" "}
-                    </span>
-                    <span className="text-[#90a3bf] text-sm font-bold">
-                      day
-                    </span>
-                  </div>
-                  <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold line-through">
-                    $80.00
-                  </div>
-                </div>
-                <div className="w-[304px] h-[68px] absolute top-[167px] bg-gradient-to-b from-transparent to-white" />
-              </div>
-
-              {/* CR-V */}
-              <div className="w-[304px] h-[388px] relative bg-white rounded-[10px]">
-                <div className="w-[116px] h-11 px-5 left-[164px] top-[320px] absolute bg-[#3563e9] rounded justify-center items-center gap-2 inline-flex">
-                  <div className="w-[76px] h-6 text-center text-white text-base font-semibold leading-normal">
-                    Rent Now
-                  </div>
-                </div>
-                <div className="left-[24px] top-[272px] absolute justify-start items-start gap-4 inline-flex">
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <BsFuelPumpFill className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-7 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      80L
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1 flex">
-                    <GiCartwheel className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-12 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      Manual
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <HiUsers className="w-6 h-6 text-[#90a3bf]" />
-                    <div className="w-[60px] h-6 text-[#90a3bf] text-sm font-medium">
-                      6 People
-                    </div>
-                  </div>
-                </div>
-                <div className="w-6 h-6 left-[256px] top-[24px] absolute">
-                  <div className="w-6 h-6 left-0 top-0 absolute"></div>
-                </div>
-                <div className="left-[24px] top-[24px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-32 h-6 text-[#1a202c] text-xl font-bold leading-[30px]">
-                    CR - V
-                  </div>
-                  <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold leading-[21px]">
-                    SUV
-                  </div>
-                  <IoHeart className="w-6 h-6 left-[220px] absolute text-red-500" />
-                </div>
-                <div className="left-[24px] top-[320px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-32 h-11">
-                    <span className="text-[#1a202c] text-xl font-bold">
-                      $80.00/{" "}
-                    </span>
-                    <span className="text-[#90a3bf] text-sm font-bold">
-                      day
-                    </span>
-                  </div>
-                </div>
-                <Image
-                  src={CRV}
-                  alt="CRV"
-                  className="w-[248px] h-[100px] left-[40px] top-[122px] absolute"
-                />
-                <div className="w-[304px] h-[68px] absolute top-[167px] bg-gradient-to-b from-transparent to-white" />
-              </div>
-
-              {/* New Terios */}
-              <div className="w-[304px] h-[388px] relative bg-white rounded-[10px]">
-                <div className="w-[116px] h-11 px-5 left-[164px] top-[320px] absolute bg-[#3563e9] rounded justify-center items-center gap-2 inline-flex">
-                  <div className="w-[76px] h-6 text-center text-white text-base font-semibold leading-normal">
-                    Rent Now
-                  </div>
-                </div>
-                <div className="left-[24px] top-[272px] absolute justify-start items-start gap-4 inline-flex">
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <BsFuelPumpFill className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-7 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      90L
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1 flex">
-                    <GiCartwheel className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-12 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      Manual
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <HiUsers className="w-6 h-6 text-[#90a3bf]" />
-                    <div className="w-[60px] h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      6 People
-                    </div>
-                  </div>
-                </div>
-                <div className="w-6 h-6 left-[256px] top-[24px] absolute">
-                  <div className="w-6 h-6 left-0 top-0 absolute"></div>
-                </div>
-                <div className="left-[24px] top-[24px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-[140px] h-6 text-[#1a202c] text-xl font-bold leading-[30px]">
-                    All New Terios
-                  </div>
-                  <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold leading-[21px]">
-                    SUV
-                  </div>
-                  <IoIosHeartEmpty className="w-6 h-6 text-[#90A3BF] left-[220px] absolute" />
-                </div>
-                <div className="left-[24px] top-[320px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-32 h-11">
-                    <span className="text-[#1a202c] text-xl font-bold">
-                      $74.00/{" "}
-                    </span>
-                    <span className="text-[#90a3bf] text-sm font-bold">
-                      day
-                    </span>
-                  </div>
-                </div>
-                <Image
-                  src={NewTerios}
-                  alt="New Terios"
-                  className="w-56 h-[100px] left-[40px] top-[122px] absolute"
-                />
-                <div className="w-[304px] h-[68px] absolute top-[167px] bg-gradient-to-b from-transparent to-white" />
-              </div>
-        </div>
-
-        <div className="justify-start items-start gap-8 inline-flex">
-
-              {/* MG ZX Exclusice */}
-              <div className="w-[304px] h-[388px] relative bg-white rounded-[10px]">
-                <div className="w-6 h-6 left-[256px] top-[24px] absolute">
-                  <div className="w-6 h-6 left-0 top-0 absolute"></div>
-                </div>
-                <div className="w-[116px] h-11 px-5 left-[164px] top-[320px] absolute bg-[#3563e9] rounded justify-center items-center gap-2 inline-flex">
-                  <div className="w-[76px] h-6 text-center text-white text-base font-semibold leading-normal">
-                    Rent Now
-                  </div>
-                </div>
-                <div className="left-[24px] top-[272px] absolute justify-start items-start gap-4 inline-flex">
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <BsFuelPumpFill className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-7 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      70L
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1 flex">
-                    <GiCartwheel className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-12 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      Manual
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <HiUsers className="w-6 h-6 text-[#90a3bf]" />
-                    <div className="w-[60px] h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      4 People
-                    </div>
-                  </div>
-                </div>
-                <div className="left-[24px] top-[24px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-40 h-6 text-[#1a202c] text-xl font-bold leading-[30px]">
-                    MG ZX Exclusice
-                  </div>
-                  <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold leading-[21px]">
-                    Hatchback
-                  </div>
-                  <IoIosHeartEmpty className="w-6 h-6 text-[#90A3BF] left-[220px] absolute" />
-                </div>
-                <div className="left-[24px] top-[316px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-32 h-6">
-                    <span className="text-[#1a202c] text-xl font-bold">
-                      $76.00/{" "}
-                    </span>
-                    <span className="text-[#90a3bf] text-sm font-bold">
-                      day
-                    </span>
-                  </div>
-                  <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold line-through">
-                    $80.00
-                  </div>
-                </div>
-                <Image
-                  src={MGZXExclusive}
-                  alt="MG ZX Eclusice"
-                  className="w-[264px] h-[108px] left-6 top-[118px] absolute"
-                />
-                <div className="w-[304px] h-[68px] absolute top-[167px] bg-gradient-to-b from-transparent to-white" />
-              </div>
-
-              {/* New MG ZS */}
-              <div className="w-[304px] h-[388px] relative bg-white rounded-[10px]">
-                <div className="w-[116px] h-11 px-5 left-[164px] top-[320px] absolute bg-[#3563e9] rounded justify-center items-center gap-2 inline-flex">
-                  <div className="w-[76px] h-6 text-center text-white text-base font-semibold leading-normal">
-                    Rent Now
-                  </div>
-                </div>
-                <div className="left-[24px] top-[272px] absolute justify-start items-start gap-4 inline-flex">
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <BsFuelPumpFill className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-7 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      80L
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1 flex">
-                    <GiCartwheel className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-12 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      Manual
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <HiUsers className="w-6 h-6 text-[#90a3bf]" />
-                    <div className="w-[60px] h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      6 People
-                    </div>
-                  </div>
-                </div>
-                <div className="w-6 h-6 left-[256px] top-[24px] absolute">
-                  <div className="w-6 h-6 left-0 top-0 absolute"></div>
-                </div>
-                <div className="left-[24px] top-[24px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-32 h-6 text-[#1a202c] text-xl font-bold leading-[30px]">
-                    New MG ZS
-                  </div>
-                  <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold leading-[21px]">
-                    SUV
-                  </div>
-                  <IoIosHeartEmpty className="w-6 h-6 text-[#90A3BF] left-[220px] absolute" />
-                </div>
-                <div className="left-[24px] top-[320px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-32 h-11">
-                    <span className="text-[#1a202c] text-xl font-bold">
-                      $80.00/{" "}
-                    </span>
-                    <span className="text-[#90a3bf] text-sm font-bold">
-                      day
-                    </span>
-                  </div>
-                </div>
-                <Image
-                  src={NewMGZS}
-                  alt="New MG ZS"
-                  className="w-72 h-28 top-[116px] absolute"
-                />
-                <div className="w-[304px] h-[68px] absolute top-[167px] bg-gradient-to-b from-transparent to-white" />
-              </div>
-
-              {/* MG ZX Excite */}
-              <div className="w-[304px] h-[388px] relative bg-white rounded-[10px]">
-                <div className="w-6 h-6 left-[256px] top-[24px] absolute">
-                  <div className="w-6 h-6 left-0 top-0 absolute"></div>
-                </div>
-                <div className="w-[116px] h-11 px-5 left-[164px] top-[320px] absolute bg-[#3563e9] rounded justify-center items-center gap-2 inline-flex">
-                  <div className="w-[76px] h-6 text-center text-white text-base font-semibold leading-normal">
-                    Rent Now
-                  </div>
-                </div>
-                <div className="left-[24px] top-[272px] absolute justify-start items-start gap-4 inline-flex">
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <BsFuelPumpFill className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-7 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      90L
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1 flex">
-                    <GiCartwheel className="w-6 h-6 text-[#90A3BF]" />
-                    <div className="w-12 h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      Manual
-                    </div>
-                  </div>
-                  <div className="justify-start items-start gap-1.5 flex">
-                    <HiUsers className="w-6 h-6 text-[#90a3bf]" />
-                    <div className="w-[60px] h-6 text-[#90a3bf] text-sm font-medium leading-[21px]">
-                      4 People
-                    </div>
-                  </div>
-                </div>
-                <div className="left-[24px] top-[24px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-40 h-6 text-[#1a202c] text-xl font-bold leading-[30px]">
-                    MG ZX Excite
-                  </div>
-                  <div className="w-32 h-5 text-[#90a3bf] text-sm font-bold leading-[21px]">
-                    Hatchback
-                  </div>
-                  <IoHeart className="w-6 h-6 left-[220px] absolute text-red-500" />
-                </div>
-                <Image
-                  src={MGExcite}
-                  alt="MG ZX Excite"
-                  className="w-[264px] h-[108px] top-[118px] absolute"
-                />
-                <div className="left-[24px] top-[320px] absolute flex-col justify-start items-start gap-1 inline-flex">
-                  <div className="w-32 h-11">
-                    <span className="text-[#1a202c] text-xl font-bold">
-                      $74.00/{" "}
-                    </span>
-                    <span className="text-[#90a3bf] text-sm font-bold">
-                      day
-                    </span>
-                  </div>
-                </div>
-                <div className="w-[304px] h-[68px] absolute top-[167px] bg-gradient-to-b from-transparent to-white" />
-              </div>
-        </div>
-    </div>
-            {/* Shop More Button */}
-            <div className="left-[822px] top-[1492px] absolute justify-start items-center gap-[290px] inline-flex">
-                <div className="w-[156px] h-11 px-5 bg-[#3563e9] rounded justify-center items-center gap-2 flex">
-                <div className="w-[116px] h-6 text-center text-white text-base font-semibold font-['Plus Jakarta Sans'] leading-normal">Show more car</div>
-                </div>
-                <div className="w-[140px] h-6 text-right text-[#90a3bf] text-sm font-medium font-['Plus Jakarta Sans'] leading-[21px]">120 Car</div>
-            </div>
-
-            {/* Arrow Button */}
-            <div className="origin-top-left -rotate-90 w-[60px] h-[60px] left-[868px] top-[130px] absolute z-50">
-            <div className="w-12 h-[60px] bg-[#103293]/30 rounded-[10px] blur-2xl absolute " />
-                <div className="w-[60px] h-[60px] left-0 top-0 absolute -rotate-90 bg-[#3563e9] rounded-[10px] flex justify-center items-center">
-                <LuArrowDownUp className="w-6 h-6 text-white" />
-                </div>
-            </div>
-
-        {/* Pick-Up Seection */}
-            <div className="w-[486px] h-[132px] left-[392px] top-[32px] absolute rounded-[10px]">
-                <div className="w-[486px] h-[136px] left-0 top-0 absolute bg-white rounded-[10px]" />
-                <div className="left-5 top-[24px] absolute justify-start items-center gap-2 inline-flex">
-                    <div className="p-1 bg-[#3563e9]/30 rounded-[70px] justify-center items-center flex">
-                        <div className="w-2 h-2 bg-[#3563e9] rounded-full" />
-                    </div>
-                    <div className="w-[75px] h-5 text-[#1a202c] text-base font-semibold leading-6">
-                        Pick - Up
-                    </div>
-                </div>
-
-            {/* Location */}
-            <div className="w-[438px] h-12 left-5 top-[60px] absolute justify-start items-start gap-3 inline-flex">
-            <div className="w-[110px] h-12 flex-col justify-start items-start gap-2 inline-flex">
-                <div className="w-[77px] h-5 text-[#1a202c] text-base font-bold leading-6">
-                Locations
-                </div>
-                <div className="justify-start items-center inline-flex">
-                <div className="w-[104px] h-5 text-[#90a3bf] text-xs font-medium">
-                    Select your city
-                </div>
-                <FaChevronDown className="w-3.5 h-3.5 text-[#1A202C]" />
-                </div>
-            </div>
-            <div className="w-px h-full mx-7 border border-[#c3d4e9]/40"></div>
-
-            {/* Date */}
-            <div className="w-[116px] h-[48px] flex-col justify-start items-start ml-[-30px] gap-2 inline-flex">
-                <div className="w-12 h-5 text-[#1a202c] text-base font-bold leading-normal">
-                Date
-                </div>
-                <div className="justify-start items-center inline-flex">
-                <div className="w-28 h-5 text-[#90a3bf] text-xs font-medium">
-                    Select your date
-                </div>
-                <FaChevronDown className="w-3.5 h-3.5 text-[#1A202C]" />
-                </div>
-            </div>
-            <div className="w-px h-full mx-4 border border-[#c3d4e9]/40"></div>
-
-
-            {/* Time */}
-            <div className="flex-col justify-start items-start ml-[-20px] gap-2 inline-flex">
-                <div className="w-12 h-5 text-[#1a202c] text-base font-bold leading-normal">
-                Time
-                </div>
-                <div className="justify-start items-center inline-flex">
-                <div className="w-[108px] h-5 text-[#90a3bf] text-xs font-medium">
-                    Select your time
-                </div>
-                <FaChevronDown className="w-3.5 h-3.5 text-[#1A202C]" />
-                </div>
-            </div>
-            </div>
-        </div>
-
-        {/* Drop-Off Section */}
-        <div className="w-[486px] h-[132px] left-[921px] top-[32px] absolute rounded-[10px]">
-            <div className="w-[486px] h-[136px] left-0 top-0 absolute bg-white rounded-[10px]" />
-
-                <div className="left-5 top-[24px] absolute justify-start items-center gap-2 inline-flex">
-                        <div className="p-1 bg-[#5caffc]/30 rounded-[70px] justify-center items-center flex">
-                            <div className="w-2 h-2 bg-[#54a6ff] rounded-full" />
+            <div className="flex w-full max-w-[1440px] min-h-screen mx-auto bg-[#f6f7f9] relative">
+                {/* Sidebar */}
+                <aside 
+                    id="default-sidebar" 
+                    className={`z-40 w-[360px] h-[1600px] transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`} 
+                    aria-label="Sidebar"
+                    >
+                    <div className="h-full px-4 overflow-y-auto bg-white">
+                        {/* Sidebar content */}
+                        <div className="w-[104px] h-5 ml-2 mt-8 text-[#90a3bf] text-xs font-semibold">T Y P E</div>
+                        <div className="space-y-3 font-medium">
+                            <CheckboxItem label="Sport" count={10} />
+                            <CheckboxItem label="SUV" count={12} />
+                            <CheckboxItem label="MPV" count={16} />
+                            <CheckboxItem label="Sedan" count={20} />
+                            <CheckboxItem label="Coupe" count={14} />
+                            <CheckboxItem label="Hatchback" count={14} />
                         </div>
-                        <div className="w-[90px] h-5 text-[#1a202c] text-base font-semibold leading-6">
-                            Drop - Off
+
+                        <div className="w-[104px] h-5 ml-2 mt-10 text-[#90a3bf] text-xs font-semibold">C A P A C I T Y</div>
+                    <div className="space-y-3 font-medium">
+                            <CheckboxItem label="2 Person" count={10} />
+                            <CheckboxItem label="4 Person" count={14} />
+                            <CheckboxItem label="6 Person" count={12} />
+                            <CheckboxItem label="8 person" count={16} />
+                    </div>
+                        
+                        {/* Price Range Slider */}
+                        <div className="w-[104px] h-5 ml-2 mt-10 text-[#90a3bf] text-xs font-semibold">P R I C E</div>
+                        <div className="relative space-y-3 mt-3">
+                            <input 
+                                id="labels-range-input" 
+                                type="range" 
+                                value={sliderValue} 
+                                min="50" 
+                                max="100" 
+                                onChange={handleSliderChange} 
+                                className="w-[270px] h-5 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                                style={{ background: `linear-gradient(to right, #3b82f6 ${(sliderValue - 50) * 2}%, #d1d5db ${(sliderValue - 50) * 2}%)` }}
+                            />
+                            <div className="flex justify-between">
+                                <span className="text-xl text-[#596780] font-semibold">Max: ${sliderValue}</span>
+                            </div>
                         </div>
-                </div>      
 
-            {/* Location */}
-            <div className="w-[438px] h-12 left-5 top-[60px] absolute justify-start items-start gap-3 inline-flex">
-            <div className="w-[110px] h-12 flex-col justify-start items-start gap-2 inline-flex">
-                <div className="w-[77px] h-5 text-[#1a202c] text-base font-bold leading-6">
-                Locations
-                </div>
-                <div className="justify-start items-center inline-flex">
-                <div className="w-[104px] h-5 text-[#90a3bf] text-xs font-medium">
-                    Select your city
-                </div>
-                <FaChevronDown className="w-3.5 h-3.5 text-[#1A202C]" />
+                    </div>
+                </aside>
+
+                <div className="flex-1 p-4">
+
+                    {/* Pick-Up and Drop-Off Selection */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4 ml-[-300px] md:ml-0 relative">
+
+                    {/* Navigation Button */}
+                    <div className="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 ml-[-290px] md:ml-0 mt-[80px] md:mt-0">
+                        <button className="w-[60px] h-[60px] bg-[#3563e9] rounded-[10px] flex justify-center items-center">
+                        <div className="w-[42px] h-[60px] absolute bg-[#103193]/30 rounded-[10px] blur-2xl" />
+                            <LuArrowDownUp className="w-6 h-6 text-white" />
+                        </button>
+                    </div>
+
+                        {/* Pick-Up */}
+                        <div className="w-[320px] h-[120px] md:w-[486px] md:h-[132px] bg-white rounded-[10px] p-4 mb-4 md:mb-0">
+                            <div className="flex items-center gap-2 mb-4">
+                                <div className="p-1 bg-[#3563e9]/30 rounded-[70px] justify-center items-center flex">
+                                    <div className="w-2 h-2 bg-[#3563e9] rounded-full" />
+                                </div>
+                                <h2 className="text-[#1a202c] text-base font-semibold">Pick - Up</h2>
+                            </div>
+
+                            <div className="grid grid-cols-3 gap-4">
+                                <div>
+                                    <label className="text-base font-bold">Locations</label>
+                                    <div className="flex items-center mt-2">
+                                        <input type="text" placeholder="Select your city" className="w-full text-xs font-medium border-none outline-none" />
+                                        <FaChevronDown className="ml-2" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label className="text-base font-bold">Date</label>
+                                    <div className="flex items-center mt-2">
+                                        <input type="text" placeholder="Select your date" className="w-full text-xs font-medium border-none outline-none" />
+                                        <FaChevronDown className="ml-2" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label className="text-base font-bold">Time</label>
+                                    <div className="flex items-center mt-2">
+                                        <input type="text" placeholder="Select your time" className="w-full text-xs font-medium border-none outline-none" />
+                                        <FaChevronDown className="ml-2" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Drop-Off */}
+                        <div className="w-[320px] h-[120px] md:w-[486px] md:h-[132px] bg-white rounded-[10px] p-4">
+                            <div className="flex items-center gap-2 mb-4">
+                                <div className="p-1 bg-[#5caffc]/30 rounded-[70px] justify-center items-center flex">
+                                    <div className="w-2 h-2 bg-[#54a6ff] rounded-full" />
+                                </div>
+                                <h2 className="text-[#1a202c] text-base font-semibold">Drop - Off</h2>
+                            </div>
+
+                            <div className="grid grid-cols-3 gap-12">
+                                <div>
+                                    <label className="text-base font-bold">Locations</label>
+                                    <div className="flex items-center mt-2">
+                                        <input type="text" placeholder="Select your city" className="w-full text-xs font-medium border-none outline-none pl-0" />
+                                        <FaChevronDown className="ml-2" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label className="text-base font-bold">Date</label>
+                                    <div className="flex items-center mt-2">
+                                        <input type="text" placeholder="Select your date" className="w-full text-xs font-medium border-none outline-none pl-0" />
+                                        <FaChevronDown className="ml-2" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label className="text-base font-bold">Time</label>
+                                    <div className="flex items-center mt-2">
+                                        <input type="text" placeholder="Select your time" className="w-full text-xs font-medium border-none outline-none pl-0" />
+                                        <FaChevronDown className="ml-2" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Cars Details */}
+                    <div className="mt-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-2 ml-[-300px] lg:ml-2">
+                        {carsData.map((car, index) => (
+                            <Card
+                                key={index}
+                                title={car.title}
+                                type={car.type}
+                                price={car.price}
+                                discount={car.discount}
+                                features={car.features}
+                                image={car.image}
+                                isFavorite={car.isFavorite}
+                            />
+                        ))}
+                        </div>
+
+                        {/* Shop More Button */}
+                        <div className="flex justify-between items-center w-[223px] h-[36px] md:w-[586px] md:h-[44px] mx-auto mt-8 ml-[-210px] md:ml-[400px]">
+                            <button className="w-[120px] h-9 md:w-[156px] md:h-11 bg-[#3563e9] text-white text-xs md:text-base font-semibold rounded py-2 flex justify-center items-center">Show More Car</button>
+                            <p className="text-[#90a3bf] text-sm font-medium">120 Car</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="w-px h-full mx-7 border border-[#c3d4e9]/40"></div>
 
-            {/* Date */}
-            <div className="w-[116px] h-[48px] flex-col justify-start items-start ml-[-30px] gap-2 inline-flex">
-                <div className="w-12 h-5 text-[#1a202c] text-base font-bold leading-normal">
-                Date
-                </div>
-                <div className="justify-start items-center inline-flex">
-                <div className="w-28 h-5 text-[#90a3bf] text-xs font-medium">
-                    Select your date
-                </div>
-                <FaChevronDown className="w-3.5 h-3.5 text-[#1A202C]" />
-                </div>
-            </div>
-            <div className="w-px h-full mx-4 border border-[#c3d4e9]/40"></div>
-
-
-            {/* Time */}
-            <div className="flex-col justify-start items-start ml-[-20px] gap-2 inline-flex">
-                <div className="w-12 h-5 text-[#1a202c] text-base font-bold leading-normal">
-                Time
-                </div>
-                <div className="justify-start items-center inline-flex">
-                <div className="w-[108px] h-5 text-[#90a3bf] text-xs font-medium">
-                    Select your time
-                </div>
-                <FaChevronDown className="w-3.5 h-3.5 text-[#1A202C]" />
-                </div>
-            </div>
-            </div>
-        </div>
-
-</div>
-    )
+      </div>
+    );
 }

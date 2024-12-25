@@ -68,21 +68,21 @@ export default function Hero() {
                         <div>
                             <label className="text-base font-bold">Locations</label>
                             <div className="flex items-center mt-2">
-                                <input type="text" placeholder="Select your city" className="w-full text-xs font-medium" />
+                                <input type="text" placeholder="City" className="w-full text-xs font-medium border-none" />
                                 <FaChevronDown className="ml-2" />
                             </div>
                         </div>
                         <div>
                             <label className="text-base font-bold">Date</label>
                             <div className="flex items-center mt-2">
-                                <input type="text" placeholder="Select your date" className="w-full text-xs font-medium" />
+                                <input type="text" placeholder="Date" className="w-full text-xs font-medium border-none" />
                                 <FaChevronDown className="ml-2" />
                             </div>
                         </div>
                         <div>
                             <label className="text-base font-bold">Time</label>
                             <div className="flex items-center mt-2">
-                                <input type="text" placeholder="Select your time" className="w-full text-xs font-medium" />
+                                <input type="text" placeholder="Time" className="w-full text-xs font-medium border-none" />
                                 <FaChevronDown className="ml-2" />
                             </div>
                         </div>
@@ -102,21 +102,21 @@ export default function Hero() {
                         <div>
                             <label className="text-base font-bold">Locations</label>
                             <div className="flex items-center mt-2">
-                                <input type="text" placeholder="Select your city" className="w-full text-xs font-medium" />
+                                <input type="text" placeholder="City" className="w-full text-xs font-medium border-none" />
                                 <FaChevronDown className="ml-2" />
                             </div>
                         </div>
                         <div>
                             <label className="text-base font-bold">Date</label>
                             <div className="flex items-center mt-2">
-                                <input type="text" placeholder="Select your date" className="w-full text-xs font-medium" />
+                                <input type="text" placeholder="Date" className="w-full text-xs font-medium border-none" />
                                 <FaChevronDown className="ml-2" />
                             </div>
                         </div>
                         <div>
                             <label className="text-base font-bold">Time</label>
                             <div className="flex items-center mt-2">
-                                <input type="text" placeholder="Select your time" className="w-full text-xs font-medium" />
+                                <input type="text" placeholder="Time" className="w-full text-xs font-medium border-none" />
                                 <FaChevronDown className="ml-2" />
                             </div>
                         </div>
