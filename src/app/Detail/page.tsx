@@ -157,7 +157,7 @@ return (
             {/* Sidebar */}
             <aside 
                 id="default-sidebar" 
-                className={`fixed z-50 w-[360px] h-[2016px] transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}
+                className={`absolute z-50 w-[360px] h-[2016px] transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}
                 aria-label="Sidebar"
                 >
                 <div className="h-full px-4 overflow-y-auto bg-white">
