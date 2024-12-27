@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect, useRef } from 'react';
 import Image from "next/image";
 import ProfilePic from "@/app/assets/ProfilePicture.png";
 import { IoSettingsSharp, IoNotifications } from "react-icons/io5";
@@ -6,6 +8,30 @@ import { RiSearch2Line } from "react-icons/ri";
 import { VscSettings } from "react-icons/vsc";
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const toggleDropdown = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    // Close dropdown on outside click
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center w-full h-[124px] bg-white sm:border border-[#c3d4e9]/40 px-8">
 
@@ -47,7 +73,39 @@ export default function Navbar() {
         </div>
 
         {/* Profile Picture */}
-        <Image src={ProfilePic} alt="Profile Picture" className="w-7 h-7 sm:w-11 sm:h-11 mt-[-170px] sm:mt-0 ml-64 sm:ml-0 rounded-full" />
+            <div className="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            {/* User Menu Button */}
+            <button
+              type="button"
+              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              id="user-menu-button"
+              aria-expanded={isOpen}
+              onClick={toggleDropdown}
+            >
+              <span className="sr-only">Open user menu</span>
+              <Image src={ProfilePic} alt="Profile Picture" className="w-7 h-7 sm:w-11 sm:h-11 mt-[-100px] sm:mt-0 ml-64 sm:ml-0 rounded-full" />
+            </button>
+
+            {/* Dropdown Menu */}
+            {isOpen && (
+              <div ref={dropdownRef} className="absolute top-full mt-[-70px] sm:mt-2 right-0 z-50 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                <ul className="py-2" aria-labelledby="user-menu-button">
+                  <li>
+                    <a href="/Category" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Category</a>
+                  </li>
+                  <li>
+                    <a href="/Detail" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Detail</a>
+                  </li>
+                  <li>
+                    <a href="/Payment" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Payment</a>
+                  </li>
+                  <li>
+                    <a href="/Dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Dashboard</a>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
 
       </div>
     </div>
