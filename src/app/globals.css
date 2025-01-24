@@ -8,6 +8,29 @@ body {
   @apply font-sans;
 }
 
+/* Wishlist Page Styling */
+.wishlist-container {
+  @apply flex flex-col items-center bg-[#f6f7f9] min-h-screen p-5;
+}
+
+.wishlist-title {
+  @apply text-3xl font-bold text-[#1a202c] mb-5;
+}
+
+.loading-message {
+  @apply text-lg font-medium text-[#90a3bf] animate-pulse;
+}
+
+.empty-wishlist {
+  @apply text-xl text-gray-500 text-center mt-10;
+}
+
+/* Navbar and Footer Adjustment for Empty Wishlist */
+.empty-wishlist-container {
+  @apply flex flex-col justify-between min-h-screen;
+}
+
+/* Media Query for Swiper Container */
 @media (min-width: 1024px) {
   .swiper-container {
     display: none !important;

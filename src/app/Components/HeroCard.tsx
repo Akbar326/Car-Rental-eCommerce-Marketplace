@@ -1,6 +1,7 @@
 'use client'
 import React from "react";
 import CarsCards from "./CarsCards";
+import Link from "next/link";
 
 const HeroCard = () => {
   return (
@@ -11,9 +12,9 @@ const HeroCard = () => {
           <h3 className="text-left text-[#90a3bf] text-base font-semibold">
             Popular Car
           </h3>
-          <h3 className="text-center text-[#3563e9] text-base font-semibold">
-            View All
-          </h3>
+          <Link href="/Wishlist" className="text-blue-600 text-base font-semibold hover:underline">
+            Go to Wishlist
+          </Link>
         </div>
         <div className="flex flex-wrap justify-center gap-8">
           <CarsCards category="popular" />
@@ -22,10 +23,7 @@ const HeroCard = () => {
         {/* Recommendation Car Section */}
         <div className="flex justify-between items-center">
           <h3 className="text-left text-[#90a3bf] text-base font-semibold">
-            Recommendation Car
-          </h3>
-          <h3 className="text-center text-[#3563e9] text-base font-semibold">
-            View All
+            Recommended Car
           </h3>
         </div>
         <div className="flex flex-wrap justify-center gap-8">
@@ -35,9 +33,11 @@ const HeroCard = () => {
 
       {/* Shop More Button */}
       <div className="flex justify-between items-center w-[280px] md:w-[760px] h-[36px] md:h-[44px] ml-9 md:ml-[560px] mt-8 px-4">
-        <button className="bg-[#3563e9] text-white text-base font-semibold rounded px-5 py-2 flex justify-center items-center">
-          Show more car
-        </button>
+        <Link href="/Category">
+          <button className="bg-[#3563e9] text-white text-base font-semibold rounded px-5 py-2 flex justify-center items-center">
+            Show more car
+          </button>
+        </Link>
 
         <p className="text-[#90a3bf] text-sm font-medium">120 Car</p>
       </div>

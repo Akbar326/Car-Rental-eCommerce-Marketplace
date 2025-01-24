@@ -6,6 +6,7 @@ import { IoSettingsSharp, IoNotifications } from "react-icons/io5";
 import { IoMdHeart } from "react-icons/io";
 import { RiSearch2Line } from "react-icons/ri";
 import { VscSettings } from "react-icons/vsc";
+import Link from 'next/link';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,11 +54,11 @@ export default function Navbar() {
       {/* Icons and Profile Picture */}
       <div className="flex items-center gap-5">
 
-        {/* Heart Icon */}
-        <div className="relative w-11 h-11 hidden sm:flex">
+        {/* Whishlist Icon */}
+        <Link href="/Wishlist" className="relative w-11 h-11 hidden sm:flex">
           <IoMdHeart className="absolute w-6 h-6 left-[10px] top-[10px] text-[#596780]" />
           <div className="w-full h-full opacity-80 rounded-full border border-[#c3d4e9]/40" />
-        </div>
+        </Link>
 
         {/* Notification Icon */}
         <div className="relative w-11 h-11 hidden sm:flex">
@@ -90,15 +91,6 @@ export default function Navbar() {
             {isOpen && (
               <div ref={dropdownRef} className="absolute top-full mt-[-70px] sm:mt-2 right-0 z-50 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
                 <ul className="py-2" aria-labelledby="user-menu-button">
-                  <li>
-                    <a href="/Category" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Category</a>
-                  </li>
-                  <li>
-                    <a href="/Detail" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Detail</a>
-                  </li>
-                  <li>
-                    <a href="/Payment" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Payment</a>
-                  </li>
                   <li>
                     <a href="/Dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Dashboard</a>
                   </li>
