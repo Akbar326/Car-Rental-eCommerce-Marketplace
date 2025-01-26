@@ -20,7 +20,7 @@ This project includes comprehensive documentation covering the development proce
 - `Day6_Deployment_Preparation_and_Staging_Environment_Setup.pdf`: Deployment preparation and staging environment setup
 
 ## Deployment
-The project is deployed on Vercel. For detailed information about the deployment process and staging environment setup, please refer to `docs/day6_deployment.md`.
+The project is deployed on Vercel. For detailed information about the deployment process and staging environment setup, please refer to `Day6_Deployment_Preparation_and_Staging_Environment_Setup.pdf`.
 
 ## Getting Started
 1. Clone the repository
