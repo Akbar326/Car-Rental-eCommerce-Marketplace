@@ -12,7 +12,7 @@ This repository contains the code for a Car Rental eCommerce Marketplace, develo
 ## Documentation
 This project includes comprehensive documentation covering the development process from Day 1 to Day 6. The documentation can be found in the `Document/` folder:
 
-- Day1_Laying_the_Foundation.pdf`: Initial project planning and setup
+- `Day1_Laying_the_Foundation.pdf`: Initial project planning and setup
 - `Day2_Marketplace_Technical_Foundation.pdf`: Frontend development progress
 - `Day3_API_Integration_and_Data_Migration.pdf`: Backend integration details
 - `Day4_Building_Dynamic_Frontend_Components.pdf`: Feature completion and refinement
